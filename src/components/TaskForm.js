@@ -25,13 +25,15 @@ const initialValues = {
   task_tags: "",
   task_status: "",
   created_at: "",
-  updated_at: "",
+  updated_at: ""
 };
+ 
 
 // Database
 const URL = "https://task-db.glitch.me/data";
 
-const TaskForm = () => {
+const TaskForm = () => { 
+  
   const [modalShow, setModalShow] = useState(false);
   const [data, setData] = useState([]);
   const [updatingTask, setCurrentTask] = useState(null);
@@ -41,14 +43,15 @@ const TaskForm = () => {
   const [details, setDetails] = useState("");
   const [show, setShow] = useState(false);
 
+
+
   // Get Task
   const fetchData = async () => {
     await axios
       .get(URL)
       .then((res) => {
-        setData(res.data.reverse());
-      })
-      .catch((error) => toast.error(error.message));
+        setData(res.data.reverse()); 
+      }).catch((error) => toast.error(error.message));
   };
 
   // Add Task
@@ -140,14 +143,14 @@ const TaskForm = () => {
 
   // Normalize Date
   const normalizeDate = (date) => {
-        var nDate;
-        if(date!=''){
-             nDate = new Date(date).toString();
-        }
-        else {
-             nDate = 'No update history';
-        }
-        return nDate;
+    var nDate;
+    if (date !== '') {
+      nDate = new Date(date).toString();
+    }
+    else {
+      nDate = 'No update history';
+    }
+    return nDate;
   }
 
   // Show All Details
@@ -187,7 +190,7 @@ const TaskForm = () => {
   });
 
   return (
-    <>
+    <> 
       {/* Toast container */}
       <ToastContainer
         position="top-right"
@@ -323,7 +326,7 @@ tasks)"
                 onBlur={formik.handleBlur}
               ></input>
               {formik.errors.task_assgined_to &&
-              formik.touched.task_assgined_to ? (
+                formik.touched.task_assgined_to ? (
                 <p className="form-error">{formik.errors.task_assgined_to}</p>
               ) : null}
             </div>
@@ -341,7 +344,8 @@ tasks)"
         </Modal.Body>
       </Modal>
 
-      <section className="wrapper py-5">
+
+      <section className="wrapper py-5"> 
         <div className="container">
           <div className="row d-flex justify-space-between mb-5">
             <div className="col-12">
@@ -350,11 +354,11 @@ tasks)"
                   <h3>Task App</h3>
                 </div>
 
-                {/* Add Task */}
+                {/* Repository Link */}
                 <div className="col-6 text-end">
-                  <Button variant="primary" onClick={AddTaskClick}>
-                    <i className="fa-solid fa-plus"></i> Add Task
-                  </Button>
+                  <a href="https://github.com/dev-sanjay-negi/task-management-app" target="_blank" rel="noreferrer" className="btn btn-primary">
+                    Documentation
+                  </a>
                 </div>
               </div>
             </div>
@@ -362,7 +366,7 @@ tasks)"
             {/* Filters */}
             <div className="col-12 ">
               <div className="row d-flex justify-space-between">
-                <div className="col-12 mb-3 col-lg-6  col-md-4 col-sm-12">
+                <div className="col-12 mb-3 col-lg-3  col-md-3 col-sm-12">
                   <input
                     type="search"
                     placeholder="Enter the keyword"
@@ -370,7 +374,7 @@ tasks)"
                     onKeyDown={(e) => setSearchQuery(e.target.value)}
                   ></input>
                 </div>
-                <div className="col-12 mb-3 col-lg-3  col-md-4 col-sm-12">
+                <div className="col-12 mb-3 col-lg-3  col-md-3 col-sm-12">
                   <select
                     name="task_status"
                     className="form-control"
@@ -382,7 +386,7 @@ tasks)"
                     <option value="completed">Completed</option>
                   </select>
                 </div>
-                <div className="col-12 mb-3 col-lg-3  col-md-4 col-sm-12">
+                <div className="col-12 mb-3 col-lg-3  col-md-3 col-sm-12">
                   <select
                     name="task_priority"
                     className="form-control"
@@ -394,87 +398,102 @@ tasks)"
                     <option value="low">Low</option>
                   </select>
                 </div>
+                <div className="col-12 mb-3 col-lg-3 col-md-3 col-sm-12">
+                  <Button variant="primary" className="w-100" onClick={AddTaskClick}>
+                    <i className="fa-solid fa-plus"></i> Add Task
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
 
-        {/* Reposittory link */}
-  <a href="https://github.com/dev-sanjay-negi/task-management-app" target="_blank">Repository</a>
-
           {/* Task Listing */}
           <div className="appList col-12">
             <div className="row">
-              {filterTasks(data).map((task) => (
-                <div
-                  className="cardOuter col-lg-4 col-md-6 col-sm-12"
-                  key={task.id}
-                >
-                  <div className="card">
-                    <div className="cardInr">
-                      <div className="tasktopMeta">
-                        <div className="d-flex  flex-wrap justify-space-between w-100">
-                          <div className="col-6 priority">
-                            <i
-                              className={
-                                task.task_priority === "high"
-                                  ? "fa fa-circle text-danger"
-                                  : task.task_priority === "medium"
-                                  ? "fa fa-circle text-warning"
-                                  : "fa fa-circle text-success"
-                              }
-                            />
-                            {task.task_priority}
+              <div className="col-12 mb-3 filterCount">
+                <h6>Showing {filterTasks(data).length} out of {data.length} tasks</h6>
+              </div>
+              {
+                filterTasks(data).length !== 0 ?
+
+                  filterTasks(data).map((task) => (
+                    <div
+                      className="cardOuter col-lg-4 col-md-6 col-sm-12"
+                      key={task.id}
+                    >
+                      <div className="card">
+                        <div className="cardInr">
+                          <div className="tasktopMeta">
+                            <div className="d-flex  flex-wrap justify-space-between w-100">
+                              <div className="col-6 priority">
+                                <i
+                                  className={
+                                    task.task_priority === "high"
+                                      ? "fa fa-circle text-danger"
+                                      : task.task_priority === "medium"
+                                        ? "fa fa-circle text-warning"
+                                        : "fa fa-circle text-success"
+                                  }
+                                />
+                                {task.task_priority}
+                              </div>
+                              <div className="col-6 status text-end">
+                                <span
+                                  className={
+                                    task.task_status === "inprocess"
+                                      ? "badge bg-warning text-dark"
+                                      : task.task_status === "pending"
+                                        ? "badge bg-danger"
+                                        : "badge bg-success"
+                                  }
+                                >
+                                  {task.task_status}
+                                </span>
+                              </div>
+                            </div>
                           </div>
-                          <div className="col-6 status text-end">
-                            <span
-                              className={
-                                task.task_status === "inprocess"
-                                  ? "badge bg-warning text-dark"
-                                  : task.task_status === "pending"
-                                  ? "badge bg-danger"
-                                  : "badge bg-success"
-                              }
+                          <div className="taskTitle">
+                            <h3>{task.task_title}</h3>
+                          </div>
+                          <div className="taskDesc">
+                            <p>{task.task_desc}</p>
+                          </div>
+                          <div className="taskTags">{mapTags(task.task_tags)}</div>
+                          <div className="taskOwner">
+                            <i className="fa-regular fa-user"></i>
+                            {task.task_assgined_to}
+                          </div>
+                          <div className="taskMeta">
+                            <div
+                              className="allDetails text-primary"
+                              onClick={() => {
+                                showTaskDetails(task.id);
+                              }}
                             >
-                              {task.task_status}
-                            </span>
+                              Check full details
+                            </div>
+                            <div className="taskActions">
+                              <ul>
+                                <li onClick={() => fetchDataForUpdate(task.id)}>
+                                  <i className="fa-regular fa-pen-to-square"></i>
+                                </li>
+                                <li onClick={() => deleteData(task.id)}>
+                                  <i className="fa-regular fa-trash-can"></i>
+                                </li>
+                              </ul>
+                            </div>
                           </div>
-                        </div>
-                      </div>
-                      <div className="taskTitle">
-                        <h3>{task.task_title}</h3>
-                      </div>
-                      <div className="taskDesc">
-                        <p>{task.task_desc}</p>
-                      </div>
-                      <div className="taskTags">{mapTags(task.task_tags)}</div>
-                      <div className="taskOwner">
-                        <i className="fa-regular fa-user"></i>
-                        {task.task_assgined_to}
-                      </div>
-                      <div className="taskMeta">
-                        <div
-                          className="allDetails text-primary"
-                          onClick={() => {
-                            showTaskDetails(task.id);
-                          }}
-                        >
-                          Check full details
-                        </div>
-                        <div className="taskActions">
-                          <ul>
-                            <li onClick={() => fetchDataForUpdate(task.id)}>
-                              <i className="fa-regular fa-pen-to-square"></i>
-                            </li>
-                            <li onClick={() => deleteData(task.id)}>
-                              <i className="fa-regular fa-trash-can"></i>
-                            </li>
-                          </ul>
                         </div>
                       </div>
                     </div>
+                  ))
+                  :
+                  <div className="text-center p-5 bg-light noResultsMessage">
+                    <h4>Oops! no such task found.</h4>
+                    <p>Add a new record by simply clicking the "<span className="text-success fw-bold">Add Task</span>" button on top right side.
+                    </p>
                   </div>
-                </div>
-              ))}
+              }
             </div>
           </div>
         </div>
@@ -488,54 +507,54 @@ tasks)"
             <Offcanvas.Title>Task Details</Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
-            <h2>{details.task_title}</h2>
+            <h2 style={{ textTransform: "capitalize" }}>{details.task_title}</h2>
             <hr />
-            <h6>Description</h6>
+            <h6><i class="fa-regular fa-file-lines"></i> Description</h6>
             <p>{details.task_desc}</p>
             <hr />
-            <h6>Tags associated with</h6>
+            <h6><i class="fa-solid fa-hashtag"></i> Tags associated with</h6>
             <div className="taskTags">{details.task_tags}</div>
             <hr />
-            <h6>Priority</h6>
+            <h6><i class="fa-regular fa-star"></i> Priority</h6>
             <p className="iconmar">
               <i
                 className={
                   details.task_priority === "high"
                     ? "fa fa-circle text-danger"
                     : details.task_priority === "medium"
-                    ? "fa fa-circle text-warning"
-                    : "fa fa-circle text-success"
+                      ? "fa fa-circle text-warning"
+                      : "fa fa-circle text-success"
                 }
               />
               {details.task_priority}
             </p>
             <hr />
-            <h6>Status</h6>
+            <h6><i class="fa-solid fa-chart-simple"></i> Status</h6>
             <p>
               <span
                 className={
                   details.task_status === "inprocess"
                     ? "badge bg-warning text-dark"
                     : details.task_status === "pending"
-                    ? "badge bg-danger"
-                    : "badge bg-success"
+                      ? "badge bg-danger"
+                      : "badge bg-success"
                 }
               >
                 {details.task_status}
               </span>
             </p>
             <hr />
-            <h6>Assigned To</h6>
+            <h6><i class="fa-regular fa-user"></i> Assigned To</h6>
             <p>{details.task_assgined_to}</p>
             <hr />
-            <h6>Due date</h6>
+            <h6><i class="fa-regular fa-clock"></i> Due date</h6>
             <p>{details.task_duedate}</p>
             <hr />
-            <h6>Created at</h6>
+            <h6><i class="fa-regular fa-calendar"></i> Created at</h6>
             <p>{normalizeDate(details.created_at)}</p>
             <hr />
-              
-            <h6>Last updated at</h6>
+
+            <h6><i class="fa-solid fa-calendar-check"></i> Last updated at</h6>
             <p>{normalizeDate(details.updated_at)}</p>
           </Offcanvas.Body>
         </Offcanvas>
