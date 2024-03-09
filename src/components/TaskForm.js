@@ -140,9 +140,15 @@ const TaskForm = () => {
 
   // Normalize Date
   const normalizeDate = (date) => {
-    const nDate = new Date(date).toString();
-    return nDate;
-  };
+        var nDate;
+        if(date){
+             nDate = new Date(date).toString();
+        }
+        else {
+             nDate = 'No update history';
+        }
+        return nDate;
+  }
 
   // Show All Details
   const showTaskDetails = async (id) => {
@@ -528,6 +534,7 @@ tasks)"
             <h6>Created at</h6>
             <p>{normalizeDate(details.created_at)}</p>
             <hr />
+              
             <h6>Last updated at</h6>
             <p>{normalizeDate(details.updated_at)}</p>
           </Offcanvas.Body>
