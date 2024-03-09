@@ -13,9 +13,9 @@ The database is deployed on the glitch.me at (https://task-db.glitch.me/data)
 
 -- POST - https://task-db.glitch.me/data
 
--- PUT - https://task-db.glitch.me/data/${id} (replace id with the task_ID) {https://task-db.glitch.me/data/1}
+-- PUT - https://task-db.glitch.me/data/${id} (replace id with the task_ID) { https://task-db.glitch.me/data/1 }
 
--- DELETE - https://task-db.glitch.me/data/${id} (replace id with the task_ID) {https://task-db.glitch.me/data/18}
+-- DELETE - https://task-db.glitch.me/data/${id} (replace id with the task_ID) { https://task-db.glitch.me/data/18 }
 
 # Database
 To view the database, please refer to https://task-db.glitch.me/data.
