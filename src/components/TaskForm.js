@@ -195,7 +195,7 @@ const TaskForm = () => {
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        {updatingTask ? 'Edit Task' : 'Add Task'}
+                       Task
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -265,7 +265,7 @@ tasks)' value={formik.values.task_tags} onChange={formik.handleChange}
                         </div>
 
                         <div className='form-group mb-3'>
-                            <button type="button" onClick={formik.handleSubmit} className='input-button btn btn-primary' >  {updatingTask ? 'Submit' : 'Add Task'}</button>
+                            <button type="button" onClick={formik.handleSubmit} className='input-button btn btn-primary' >Submit</button>
                         </div>
                     </form>
                 </Modal.Body>
