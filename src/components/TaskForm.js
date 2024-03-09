@@ -392,6 +392,9 @@ tasks)"
             </div>
           </div>
 
+        {/* Reposittory link */}
+  <a href="https://github.com/dev-sanjay-negi/task-management-app" target="_blank">Repository</a>
+
           {/* Task Listing */}
           <div className="appList col-12">
             <div className="row">
