@@ -45,7 +45,7 @@ const TaskForm = () => {
     // Get Task
     const fetchData = async () => {
         await axios.get(URL).then((res) => {
-            setData(res.data);
+            setData(res.data.reverse()); 
         }).catch((error) => toast.error(error.message));
     }
 
