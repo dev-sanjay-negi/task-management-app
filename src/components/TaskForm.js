@@ -264,7 +264,7 @@ tasks)' value={formik.values.task_tags} onChange={formik.handleChange}
                         </div>
 
                         <div className='form-group mb-3'>
-                            <button type="button" onClick={formik.handleSubmit} className='input-button btn btn-primary' >Add Task</button>
+                            <button type="button" onClick={formik.handleSubmit} className='input-button btn btn-primary' >  {updatingTask ? 'Submit' : 'Add Task'}</button>
                         </div>
                     </form>
                 </Modal.Body>
