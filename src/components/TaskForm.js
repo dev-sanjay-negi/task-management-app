@@ -141,7 +141,7 @@ const TaskForm = () => {
   // Normalize Date
   const normalizeDate = (date) => {
         var nDate;
-        if(date){
+        if(date!=''){
              nDate = new Date(date).toString();
         }
         else {
