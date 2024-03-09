@@ -92,6 +92,7 @@ const TaskForm = () => {
 
     // Task Button Behaviour
     const AddTaskClick = () => {
+        setCurrentTask('');
         formik.resetForm();
         setModalShow(true);
     }
